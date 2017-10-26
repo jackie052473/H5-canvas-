@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		img{
+			display: none;
+		}
+		body{
+			text-align: center;
+		}
+		canvas{
+			border:1px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+	<audio src="sound/bgsound.ogg"></audio>
+	<canvas width="240" height="320" id="my_canvas"></canvas>
+	<img src="img/bj.png" alt="">
+	<img src="img/cd.png" alt="">
+	<img src="img/chuizi.png" alt="">
+	<img src="img/cw.png" alt="">
+	<img src="img/cwk.png" alt="">
+	<img src="img/dishu.png" alt="">
+	<img src="img/dishu_2.png" alt="">
+	<img src="img/life.png" alt="">
+	<img src="img/life1.png" alt="">
+	<img src="img/logo.png" alt="">
+	<img src="img/num_1.png" alt="">
+	<img src="img/num_2.png" alt="">
+	<img src="img/tuzi.png" alt="">
+	<img src="img/ui.png" alt="">
+	<script type="text/javascript" src="js/Game.js">
+	</script>
+	<script type="text/javascript" src="js/Animal.js"></script>
+	<script> 
+		// 分析游戏
+		// 整个游戏由几部分组成？
+		/*
+			1 Game 类
+			处于中介者的位置 所有的元素都是它的属性
+			  animals: 动物
+			2 Animal 类
+		*/
+		window.onload =function(){
+			// 使用循环 将所有图片的名字设置为id
+			var imgs = document.getElementsByTagName("img");
+			for(var i = 0;i<imgs.length;i++){
+				imgs[i].id  = imgs[i].src.slice(imgs[i].src.lastIndexOf("/")+1,imgs[i].src.lastIndexOf(".")); 
+			}
+			// 节省代码
+		  function $(id){
+		  	return document.getElementById(id);
+		  } 
+		  var dishu = $("dishu");
+		  var dishu_2 = $("dishu_2");
+		  var tuzi = $("tuzi");
+		  // 初始化动物
+		  var animal = new Animal([dishu,dishu_2,tuzi]);
+		  var ctx = $("my_canvas").getContext("2d");
+		  var bg = $("bj");
+		  var logo = $("logo");
+		  var ui = $("ui");
+		  var hammer = $("chuizi");
+		  // 初始化一个游戏对象
+			var g = new Game(ctx,bg,animal,logo,ui,hammer); 
+		}
+	</script>
+</body>
+</html>
